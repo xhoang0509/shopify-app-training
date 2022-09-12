@@ -10,12 +10,29 @@ function General() {
   // page state
   const [name, setName] = useState();
   const [priority, setPriority] = useState(0);
-  const [selected, setSelected] = useState("today");
+  const [selected, setSelected] = useState("enable");
+  const [error, setError] = useState({
+    name: "",
+    priority: "",
+  });
 
   const handleNameChange = useCallback((value) => setName(value), []);
   const handleSelectChange = useCallback((value) => setSelected(value), []);
   const handlePriorityChange = useCallback((newValue) => {
     setPriority(newValue);
+
+    if (parseInt(newValue) < 0 || parseInt(newValue) > 99) {
+      setError({
+        ...error,
+        priority:
+          "Please enter an integer from 0 to 99.0 is the highest priority.",
+      });
+    } else {
+      setError({
+        ...error,
+        priority: "",
+      });
+    }
   }, []);
 
   return (
@@ -33,6 +50,7 @@ function General() {
         value={priority}
         onChange={handlePriorityChange}
         helpText="Please enter an integer from 0 to 99.0 is the highest priority."
+        error={error.priority}
       />
       <Select
         label="Status"

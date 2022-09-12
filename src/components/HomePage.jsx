@@ -8,9 +8,6 @@ import { ProductsCard } from "./ProductsCard";
 export function HomePage() {
   return (
     <Page fullWidth>
-      {/* <Layout>
-        <ProductsCard />
-      </Layout> */}
       <Layout>
         <Layout.Section>
           <Heading element="h1" style={{ marginBottom: "10px" }}>
